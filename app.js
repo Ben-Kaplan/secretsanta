@@ -1,4 +1,9 @@
-const familyMembers = [{firstName: 'Stan', lastName: 'Shapiro'},{firstName: 'Cheryl', lastName: 'Shapiro'}, {firstName: 'Perrin', lastName: 'Shapiro'}, {jfirstName: 'Benjamin', lastName: 'Kaplan'}, {firstName: 'Sherry', lastName: 'Kaplan'}, {firstName: 'Barry', lastName: 'Kaplan'}, {firstName: 'Rae', lastName: 'Weintraub'}, {firstName: 'Louis', lastName: 'Weinttraub'}, {firstName: 'Same', lastName: 'Weintraub'}];
+
+//demonstration example array
+
+const familyMembers = [{firstName: 'Stan', lastName: 'Shapiro'},{firstName: 'Cheryl', lastName: 'Shapiro'}, {firstName: 'Perrin', lastName: 'Shapiro'}, {firstName: 'Benjamin', lastName: 'Kaplan'}, {firstName: 'Sherry', lastName: 'Kaplan'}, {firstName: 'Barry', lastName: 'Kaplan'}, {firstName: 'Rae', lastName: 'Weintraub'}, {firstName: 'Louis', lastName: 'Weinttraub'}, {firstName: 'Sam', lastName: 'Weintraub'}];
+
+//start define class
 
 class SecretSanta {
     constructor (name) {
@@ -6,9 +11,12 @@ class SecretSanta {
         this.matchResults = [];
         this.invalidRecipient = '';
         this.currentMatch = '';
+        this.immediateFamily ='';
         
     }
-    //check to see if santa has had same recipient for past three years
+
+    //checking for repetition after three years
+
     checkForRepeats (arr) {
         for (let i = 0; i < arr.length; i++) {
             if (arr[i] === arr[i - 1] && arr[i] === arr[i - 2]) {
@@ -16,37 +24,56 @@ class SecretSanta {
             }
         }
     }
+
     //matching family members function. Logic built to determine sender's identity and prevent self-sent gifts.
+    
     matchSendingToReceiving (arr) {
+        this.currentMatch = '';
         let receivingList = arr.slice();
         for (let i = 0; i < arr.length; i++) {
             let receivingListIndex = Math.floor(Math.random() * receivingList.length);
-            while (receivingList[receivingListIndex] == this.sender) {
-                console.log("cannot send presents to yourself!!");
+            if (receivingList[receivingListIndex].firstName === this.sender.firstName && receivingList[receivingListIndex].lastName === this.sender.lastName) {
+                console.log("cannot send presents to yourself");
                 receivingListIndex = Math.floor(Math.random() * receivingList.length);
-            }
-            //run checkForRepeats to determine if santa has had recipient for previous three years
-            this.checkForRepeats(this.matchResults)
-            if (receivingListIndex === this.invalidRecipient) {
-                console.log("Too many years in a ROW! RE-ROLL!!!")
-                receivingListIndex = Math.floor(Math.random() * receivingList.length);
-                this.invalidRecipient = '';
             } else {
-                let receiving = receivingList.splice(receivingListIndex, 1)[0];
-                this.matchResults.push(receiving);
-                this.currentMatch = receiving;
+
+                //run checkForRepeats to determine if santa has had recipient for previous three years
+                
+                this.checkForRepeats(this.matchResults)
+                if (receivingList[receivingListIndex] === this.invalidRecipient) {
+                    console.log("Too many years in a ROW! RE-ROLL!!!")
+                    receivingListIndex = Math.floor(Math.random() * receivingList.length);
+                    this.invalidRecipient = '';
+
+                //checking to make sure recipient isn't immediate family
+
+                } else if (receivingList[receivingListIndex].lastName === this.sender.lastName) {
+                    console.log("Don't pick immediate family you already got them covered!")
+                    receivingListIndex = Math.floor(Math.random() * receivingList.length);
+                    this.invalidRecipient = '';
+                } else {
+                    let receiving = receivingList.splice(receivingListIndex, 1)[0];
+                    this.matchResults.push(receiving);
+                    this.currentMatch = receiving;
+                }
             }
+            
             
         }
         return this.currentMatch
     }
 }
+//End define class
 
-const Ben = new SecretSanta({firstname: 'Ben', lastName: 'Kaplan'})
 
-Ben.matchSendingToReceiving(familyMembers);
+//example class declaration
+
+const Ben = new SecretSanta({firstName: 'Benjamin', lastName: 'Kaplan'})
+
 Ben.matchSendingToReceiving(familyMembers);
 console.log(Ben.currentMatch);
+
+
 
 
 
