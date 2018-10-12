@@ -6,7 +6,7 @@ const familyMembers = [{firstName: 'Stan', lastName: 'Shapiro'},{firstName: 'Che
 
 //start define class
 
-module.exports = class SecretSanta {
+class SecretSanta {
     constructor (name) {
         this.sender = name;
         this.matchResults = [];
@@ -74,7 +74,7 @@ Ben.matchSendingToReceiving(familyMembers);
 console.log(Ben.currentMatch);
 
 
-
+module.exports = SecretSanta;
 
 
 
