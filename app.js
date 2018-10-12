@@ -1,11 +1,12 @@
 
+
 //demonstration example array
 
 const familyMembers = [{firstName: 'Stan', lastName: 'Shapiro'},{firstName: 'Cheryl', lastName: 'Shapiro'}, {firstName: 'Perrin', lastName: 'Shapiro'}, {firstName: 'Benjamin', lastName: 'Kaplan'}, {firstName: 'Sherry', lastName: 'Kaplan'}, {firstName: 'Barry', lastName: 'Kaplan'}, {firstName: 'Rae', lastName: 'Weintraub'}, {firstName: 'Louis', lastName: 'Weinttraub'}, {firstName: 'Sam', lastName: 'Weintraub'}];
 
 //start define class
 
-class SecretSanta {
+module.exports = class SecretSanta {
     constructor (name) {
         this.sender = name;
         this.matchResults = [];
@@ -39,16 +40,16 @@ class SecretSanta {
 
                 //run checkForRepeats to determine if santa has had recipient for previous three years
                 
-                this.checkForRepeats(this.matchResults)
+                this.checkForRepeats(this.matchResults);
                 if (receivingList[receivingListIndex] === this.invalidRecipient) {
-                    console.log("Too many years in a ROW! RE-ROLL!!!")
+                    console.log("Too many years in a ROW! RE-ROLL!!!");
                     receivingListIndex = Math.floor(Math.random() * receivingList.length);
                     this.invalidRecipient = '';
 
                 //checking to make sure recipient isn't immediate family
 
                 } else if (receivingList[receivingListIndex].lastName === this.sender.lastName) {
-                    console.log("Don't pick immediate family you already got them covered!")
+                    console.log("Don't pick immediate family you already got them covered!");
                     receivingListIndex = Math.floor(Math.random() * receivingList.length);
                     this.invalidRecipient = '';
                 } else {
@@ -60,15 +61,14 @@ class SecretSanta {
             
             
         }
-        return this.currentMatch
+        return this.currentMatch;
     }
 }
 //End define class
 
 
 //example class declaration
-
-const Ben = new SecretSanta({firstName: 'Benjamin', lastName: 'Kaplan'})
+const Ben = new SecretSanta({firstName: 'Benjamin', lastName: 'Kaplan'});
 
 Ben.matchSendingToReceiving(familyMembers);
 console.log(Ben.currentMatch);
