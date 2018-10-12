@@ -1,0 +1,70 @@
+body {
+    background-color: green;
+}
+
+iframe {
+    display: block;
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+p {
+    display: block;
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 15px;
+    text-align: center;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+h1 {
+    font-size: 80px;
+}
+
+h2 {
+    font-size: 30px;
+}
+
+h1, h2 {
+    color: red;
+    -webkit-text-fill-color: red;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: white;
+    text-align: center;
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 30px;
+    
+
+}
+
+form {
+    width: 50%;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+.name-box {
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 30px;
+    height: 30px;
+    width: 300px;
+
+}
+.submit-button {
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 30px;
+    height: 30px;
+    width: 70px;
+    background-color: red;
+    color: white;
+
+}
